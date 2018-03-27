@@ -6,7 +6,7 @@ Canetis
 
 I plan to have a grid format presentation with the y axis representing octave (currently planned for octaves 3-5) and the x axis being time. Each square in the grid will represent a whole note with options for the user to change tempo (represented by a vertical bar moving from left to right) and note lengths with two clicks that represent start and stop locations and an option for color themes. User will be able to have their track play/loop while adding notes.
 
-In a later version I will add more octaves.
+In a later version I will add more octaves, either by increasing the height of the track or by adding a vertical scroll bar to access higher or lower octaves..
 
 [wireframe] (https://wireframe.cc/P8hzDF)
 
