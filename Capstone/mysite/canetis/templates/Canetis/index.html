@@ -1,22 +1,49 @@
 
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'canetis/index.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'canetis/style.css' %}"/>
 
+<html>
+    <body>
+    <div class="wrapper">
+        <!--z-index 0-->
+        <img src="{% static 'canetis/60793_photo_manipulation_vaporwave.jpg' %}"/>
+        <div class="content">
+            <!--z-index 1-->
+            <p id="title">C A N E T I S MIDI Sequencer</p>
+                <p id="tempo_txt">Tempo</p><br>
+                <input type="text" id="tempo"><br>
+                <button id="play">Play/Pause</button>
+                <button id="stop">Stop</button>
+                <button id="save">Save</button>
+                <button id="add_column">+ Column</button>
+                <div class="main_container">
+                    <!--z-index 2-->
+                    <div class="octave_container">
+                        <p class="octave">C3</p>
+                        <p class="octave">D3</p>
+                        <p class="octave">E3</p>
+                        <p class="octave">F3</p>
+                        <p class="octave">G3</p>
+                        <p class="octave">A3</p>
+                        <p class="octave">B3</p>
+                    </div>
 
-<p id="title">Canetis MIDI Sequencer</p>
-<p id="tempo_txt">Tempo</p><br>
-<input type="text" id="tempo"><br>
-<button id="play">Play/Pause</button>
-<button id="stop">Stop</button>
-<button id="save">Save</button>
-
-<div class="grid_container">
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-</div>
-
+                    <div class="grid_container">
+                        <div class="notes">
+                            <button class="note_bt"> </button>
+                            <button class="note_bt"> </button>
+                            <button class="note_bt"> </button>
+                            <button class="note_bt"> </button>
+                            <button class="note_bt"> </button>
+                            <button class="note_bt"> </button>
+                            <button class="note_bt"> </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
 
 
 
