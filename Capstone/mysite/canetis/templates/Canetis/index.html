@@ -1,8 +1,11 @@
 
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'canetis/style.css' %}"/>
 
 <html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/0.12.78/Tone.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'canetis/style.css' %}"/>
+    </head>
     <body>
     <div class="wrapper">
         <!--z-index 0-->
@@ -11,37 +14,115 @@
             <!--z-index 1-->
             <p id="title">C A N E T I S MIDI Sequencer</p>
                 <p id="tempo_txt">Tempo</p><br>
-                <input type="text" id="tempo"><br>
+                <input type="text" id="tempo" placeholder="Tempo:130BPM" disabled><br>
                 <button id="play">Play/Pause</button>
                 <button id="stop">Stop</button>
                 <button id="save">Save</button>
                 <button id="add_column">+ Column</button>
                 <div class="main_container">
                     <!--z-index 2-->
-                    <div class="octave_container">
-                        <p class="octave">C3</p>
-                        <p class="octave">D3</p>
-                        <p class="octave">E3</p>
-                        <p class="octave">F3</p>
-                        <p class="octave">G3</p>
-                        <p class="octave">A3</p>
-                        <p class="octave">B3</p>
-                    </div>
-
                     <div class="grid_container">
                         <div class="notes">
-                            <button class="note_bt"> </button>
-                            <button class="note_bt"> </button>
-                            <button class="note_bt"> </button>
-                            <button class="note_bt"> </button>
-                            <button class="note_bt"> </button>
-                            <button class="note_bt"> </button>
-                            <button class="note_bt"> </button>
+                            <table style="width:100%" id="main_table">
+                                <tr id="C3">
+                                    <ul>
+                                        <td>C3</td>
+                                        <td><button class="note_bt">.</button></td>
+                                    </ul>
+                                </tr>
+                                <tr id="D3">
+                                    <ul>
+                                        <td>D3</td>
+                                        <td><button class="note_bt">.</button></td>
+                                    </ul>
+                                </tr>
+                                <tr id="E3">
+                                    <ul>
+                                        <td>E3</td>
+                                        <td><button class="note_bt">.</button></td>
+                                    </ul>
+                                </tr>
+                                <tr id="F3">
+                                    <ul>
+                                        <td>F3</td>
+                                        <td><button class="note_bt">.</button></td>
+                                    </ul>
+                                </tr>
+                                <tr id="G3">
+                                    <ul>
+                                        <td>G3</td>
+                                        <td><button class="note_bt">.</button></td>
+                                    </ul>
+                                </tr>
+                                <tr id="A3">
+                                    <ul>
+                                        <td>A3</td>
+                                        <td><button class="note_bt">.</button></td>
+                                    </ul>
+                                </tr>
+                                <tr id="B3">
+                                    <ul>
+                                        <td>B3</td>
+                                        <td><button class="note_bt">.</button></td>
+                                    </ul>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+
+            //create a synth and connect it to the master output (your speakers)
+
+
+            // misc variables
+
+
+            // note variables
+            // C3	130.8
+            // D3	146.8
+            // E3	164.8
+            // F3	174.6
+            // G3	196.0
+            // A3	220.0
+            // B3	246.9
+            //
+            // Tempo: 130BPM
+
+            // function to add columns
+
+            // function to play song
+
+            // function to stop song
+
+            // onclick event to change button color and play note sample
+
+            // set formula for tempo
+
+            let notes = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3'];
+            let synth = new Tone.Synth().toMaster();
+
+            let add_column = document.querySelector('#add_column');
+            let main_table = document.querySelector('#main_table');
+            add_column.onclick = function() {
+                let trs = main_table.children[0].children; // get trs
+                for (let i=0; i<trs.length; ++i) {
+                    //console.log(trs[i]);
+                    let td = document.createElement("td");
+                    let bt = document.createElement('button');
+                    bt.innerText = '.';
+                    bt.classList.add('note_bt');
+                    bt.onclick = function() {
+                        //play a middle 'C' for the duration of an 4th note
+                        synth.triggerAttackRelease(notes[i], '8n');
+                    };
+                    td.appendChild(bt);
+                    trs[i].appendChild(td);
+                }
+            }
+        </script>
     </body>
 </html>
 

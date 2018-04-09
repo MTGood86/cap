@@ -50,7 +50,7 @@ img {
 }
 
 #tempo {
-    margin-left:2%;
+    margin-left:4%;
 }
 
 #tempo_txt {
@@ -61,6 +61,7 @@ img {
     margin-top:0;
     margin-left:0;
     height:100%;
+    width:100%;
 }
 
 .notes {
@@ -82,14 +83,23 @@ img {
     margin-top:44%;
 }
 
+/*.note_bt {*/
+    /*background-color: white;*/
+    /*border-color:#42f4ce;*/
+    /*width:1%;*/
+    /*height:3%;*/
+    /*border-radius:5px;*/
+/*}*/
+
+
+
 .note_bt {
     background-color: white;
     border-color:#42f4ce;
-    margin-top: 35%;
     width:1%;
     height:3%;
-    display:block;
     border-radius:5px;
+    color:white;
 }
 
 html {
