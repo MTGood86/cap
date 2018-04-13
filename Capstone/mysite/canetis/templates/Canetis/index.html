@@ -15,9 +15,9 @@
             <p id="title">C A N E T I S MIDI Sequencer</p>
                 <p id="tempo_txt">Tempo</p><br>
                 <input type="text" id="tempo" placeholder="Tempo:130BPM" disabled><br>
-                <button id="play">Play/Pause</button>
+                <button id="play_btn">Play/Pause</button>
                 <button id="stop">Stop</button>
-                <button id="save">Save</button>
+                <button id="save" disabled>Save</button>
                 <button id="add_column">+ Column</button>
                 <div class="main_container">
                     <!--z-index 2-->
@@ -27,43 +27,71 @@
                                 <tr id="C3">
                                     <ul>
                                         <td>C3</td>
-                                        <td><button class="note_bt">.</button></td>
                                     </ul>
                                 </tr>
                                 <tr id="D3">
                                     <ul>
                                         <td>D3</td>
-                                        <td><button class="note_bt">.</button></td>
                                     </ul>
                                 </tr>
                                 <tr id="E3">
                                     <ul>
                                         <td>E3</td>
-                                        <td><button class="note_bt">.</button></td>
                                     </ul>
                                 </tr>
                                 <tr id="F3">
                                     <ul>
                                         <td>F3</td>
-                                        <td><button class="note_bt">.</button></td>
                                     </ul>
                                 </tr>
                                 <tr id="G3">
                                     <ul>
                                         <td>G3</td>
-                                        <td><button class="note_bt">.</button></td>
                                     </ul>
                                 </tr>
                                 <tr id="A3">
                                     <ul>
                                         <td>A3</td>
-                                        <td><button class="note_bt">.</button></td>
                                     </ul>
                                 </tr>
                                 <tr id="B3">
                                     <ul>
                                         <td>B3</td>
-                                        <td><button class="note_bt">.</button></td>
+                                    </ul>
+                                </tr>
+                                <tr id="C4">
+                                    <ul>
+                                        <td>C4</td>
+                                    </ul>
+                                </tr>
+                                <tr id="D4">
+                                    <ul>
+                                        <td>D4</td>
+                                    </ul>
+                                </tr>
+                                <tr id="E4">
+                                    <ul>
+                                        <td>E4</td>
+                                    </ul>
+                                </tr>
+                                <tr id="F4">
+                                    <ul>
+                                        <td>F4</td>
+                                    </ul>
+                                </tr>
+                                <tr id="G4">
+                                    <ul>
+                                        <td>G4</td>
+                                    </ul>
+                                </tr>
+                                <tr id="A4">
+                                    <ul>
+                                        <td>A4</td>
+                                    </ul>
+                                </tr>
+                                <tr id="B4">
+                                    <ul>
+                                        <td>B4</td>
                                     </ul>
                                 </tr>
                             </table>
@@ -72,58 +100,83 @@
                 </div>
             </div>
         </div>
-        <script>
-
-            //create a synth and connect it to the master output (your speakers)
-
-
-            // misc variables
-
-
-            // note variables
-            // C3	130.8
-            // D3	146.8
-            // E3	164.8
-            // F3	174.6
-            // G3	196.0
-            // A3	220.0
-            // B3	246.9
-            //
-            // Tempo: 130BPM
-
-            // function to add columns
-
-            // function to play song
-
-            // function to stop song
-
-            // onclick event to change button color and play note sample
-
-            // set formula for tempo
-
-            let notes = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3'];
-            let synth = new Tone.Synth().toMaster();
-
-            let add_column = document.querySelector('#add_column');
-            let main_table = document.querySelector('#main_table');
-            add_column.onclick = function() {
-                let trs = main_table.children[0].children; // get trs
-                for (let i=0; i<trs.length; ++i) {
-                    //console.log(trs[i]);
-                    let td = document.createElement("td");
-                    let bt = document.createElement('button');
-                    bt.innerText = '.';
-                    bt.classList.add('note_bt');
-                    bt.onclick = function() {
-                        //play a middle 'C' for the duration of an 4th note
-                        synth.triggerAttackRelease(notes[i], '8n');
-                    };
-                    td.appendChild(bt);
-                    trs[i].appendChild(td);
-                }
-            }
-        </script>
     </body>
+    <script>
+
+        // function to stop song
+
+        // onclick event to change button color and play note sample
+        let btn_toggle = 1;
+        function color_toggle_btn(btn_id) {
+            let property = document.querySelector("." + btn_id);
+            if (!property.innerText.includes(".")) {
+                property.style.backgroundColor = "#FFFFFF";
+                property.style.color = "#FFFFFF";
+                btn_toggle = 1;
+                property.innerText += ".";
+                console.log(property.innerText)
+
+            }
+            else {
+                property.innerText = property.innerText.substr(0, 2);
+                property.style.backgroundColor = "#ef37af";
+                property.style.color = "#ef37af";
+                btn_toggle = 0;
+                console.log(property.innerText)            }
+        }
+
+        let column_count = 1;
+        let main_table = document.querySelector('#main_table');
+        let notes = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4'];
+        var synth = new Tone.Synth().toMaster();
+
+        // function to add columns
+        function add_new_column() {
+            let trs = main_table.children[0].children; // get trs
+            for (let i=0; i<trs.length; ++i) {
+                //console.log(trs[i]);
+                let td = document.createElement("td");
+                let bt = document.createElement('button');
+                bt.innerText = notes[i] + '.';
+                bt.classList.add('note_bt');
+                let btn_id = notes[i] + column_count;
+                bt.classList.add(btn_id);
+                bt.onclick = function() {
+                    //play a middle 'C' for the duration of an 8th note
+                    synth.triggerAttackRelease(notes[i], '8n');
+                    color_toggle_btn(btn_id)
+                };
+                td.appendChild(bt);
+                trs[i].appendChild(td);
+            }
+            column_count += 1
+        }
+        let add_column_btn = document.querySelector('#add_column');
+        add_column_btn.onclick = add_new_column;
+
+        add_new_column();
+
+
+        // function to play song
+        let play = document.querySelector('#play_btn');
+
+
+            play.onclick = setInterval(function(){
+            console.log('test');
+            for (let i = 1; i <= column_count; i++) {
+                console.log("first loop");
+                for (let j = 0; j < notes.length; ++j) {
+                    console.log("." + notes[j] + String(i-1));
+                    let property = document.querySelector("." + notes[j] + String(i-1));
+                    if (!property.innerText.includes('.')) {
+                        synth.triggerAttackRelease(property.innerText, '8n');
+                    }
+                    // setTimeout(100);
+                }
+            // setTimeout(100);
+            }
+        }, 426);
+    </script>
 </html>
 
 
